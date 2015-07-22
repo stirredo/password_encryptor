@@ -25,7 +25,7 @@ class Password():
         return s.DecodeAES(self.password)
 
     def getDate(self):
-        dateFormat = '%d-%m-%y'
+        dateFormat = '%d-%m-%y %H:%M'
         return self.dateObj.strftime(dateFormat)
 
 
@@ -58,5 +58,10 @@ class Password():
 
 
 
+    @staticmethod
+    def clearAllPasswords(fileName = "data.pickle"):
+        handle = open(fileName, 'w')
+        handle.truncate()
+        handle.close()
 
 

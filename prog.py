@@ -7,7 +7,7 @@ from datetime import datetime
 import pickle
 
 
-dateFormat = '%d-%m-%y'
+dateFormat = '%d-%m-%y %H:%M'
 
 BLOCK_SIZE = 32
 
@@ -44,11 +44,13 @@ def DecodeAES(cipherText, cipher):
 def printMenu():
     print "1. Enter a new password"
     print "2. Show all passwords"
+    print "3. Clear the file"
 
 
 def entertainChoice(choice):
     if choice == "1":
-        date = raw_input("Enter date (dd-mm-yy)")
+        date = raw_input("Enter date (dd-mm-yy H:M): ")
+
         try:
             date = datetime.strptime(date, dateFormat)
         except ValueError:
@@ -71,6 +73,15 @@ def entertainChoice(choice):
                     print "{0}. date: {1} \t password: {2}".format(counter, p.getDate(), p.getPassword())
                 else:
                     print "Password will be available on/from: {0}".format(p.getDate())
+
+    elif choice == "3":
+        confirm = raw_input("Are you sure? y/n")
+        if( confirm == 'y'):
+            Password.clearAllPasswords()
+        else:
+            return
+
+
 
 
 def main():
